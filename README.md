@@ -14,11 +14,13 @@ POST /register
 
 ```json
 {
-    "name": "SMI11T",
-    "phone": "9545236151",
-    "email": "SMI203.sb@GMAIL.COM",
-    "college": "ASDAS",
-    "yearOfstudy": "24"
+    "name": "Smit Butle",
+    "phone": "9876543210",
+    "email": "smit@gmail.com",
+    "college": "Walchand College of Engineering, Sangli",
+    "yearOfstudy": "2024",
+    "isDualBooted": "true",
+    "referralCode": "WLUG"
 }
 ```
 
@@ -51,7 +53,17 @@ POST /schedule
   }
 }
 ```
+Sample Register for above config
 
+```
+{    
+    "name": "Smit Butle",
+    "phone": "9876543210",
+    "email": "smit@gmail.com",
+    "college": "Walchand College of Engineering, Sangli", (optional)
+    "yearOfstudy": "2024" (optional)
+}
+```
 ## Configuration
 
 ### Basic
@@ -75,14 +87,14 @@ Make sure to replace `"mongo sample uri"` with your actual MongoDB connection st
 
 The following fields are used for user registration:
 
-```json
-Name:
-Phone:
-Email:
-College:
-Year of Study:
-Is Dual Booted:
-Referral Code:
+```
+"name" :
+"phone" :
+"email" :
+"college" :
+"yearOfstudy" :
+"isDualBooted" :
+"referralCode" :
 
 Use 1 is field is required.
 Use 0 if field is optional.

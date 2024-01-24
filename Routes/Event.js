@@ -6,7 +6,6 @@ const { connectDB, disconnectDB } = require('../db')
 const mongoose = require('mongoose');
 const { body, validationResult } = require('express-validator');
 const sendEmail = require('../email');
-const e = require('express');
 
 function createEvent(opts) {
     connectDB();
@@ -141,6 +140,21 @@ newEvent.post('/schedule', [], (req, res) => {
         console.log(err);
         res.json({ success: false });
     }
+})
+
+newEvent.get('/totalregistered', async( req, res)=>{
+    const modelName = `${process.env.EVENT}-${process.env.YEAR}`;
+    const dynamicModel = createDynamicModel(modelName);
+    const totalUsers = await dynamicModel.countDocuments();
+    res.json({count : totalUsers});
+
+})
+
+newEvent.get('/listofusers', async(req, res)=>{
+    const modelName = `${process.env.EVENT}-${process.env.YEAR}`;
+    const dynamicModel = createDynamicModel(modelName);
+    const users = await dynamicModel.find();
+    res.json({users :users});
 })
 
 

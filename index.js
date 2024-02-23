@@ -29,6 +29,13 @@ fs.access('.env', fs.constants.F_OK, (err) => {
 
 
 app.get('/', (req, res) => {
+    const result = dotenv.config({ path: '.env' });
+    if (result.error) {
+        console.error('Error loading .env file:', result.error);
+    } else {
+        console.log('.env file loaded successfully!');
+    }
+
     res.status(200).json({
         success: true,
         message: `Backend Online`,
@@ -37,10 +44,8 @@ app.get('/', (req, res) => {
             year: process.env.YEAR,
             start: process.env.START,
             end: process.env.END,
-            mongo_uri: process.env.MONGO_URI,
-            email_body: process.env.EMAIL_BODY,
-            email_subject: process.env.EMAIL_SUBJECT,
             max_users: process.env.MAX_USERS,
+            
         }
     })
 })
@@ -58,7 +63,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
             }
             const newPath = path.join(uploadDir, req.file.originalname);
             fs.renameSync(req.file.path, newPath);
-            console.log('File uploaded: '+ req.file.originalname);
+            console.log('File uploaded: ' + req.file.originalname);
             res.status(200).json({ success: true, message: 'File uploaded successfully' });
         } else {
 

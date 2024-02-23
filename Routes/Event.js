@@ -32,7 +32,13 @@ const generateDynamicSchema = (fields) => {
             dynamicSchema[key] = {
                 type: String,
                 required: (fieldValue === 1),
-                // unique: true
+                validate: {
+                    validator: function (value) {
+                        return /^\d{10}$/.test(value);
+                    },
+                    message: 'Invalid phone number'
+                },
+                unique: true
             };
         }
 
@@ -53,7 +59,7 @@ const generateDynamicSchema = (fields) => {
                     },
                     message: 'Invalid email address'
                 },
-                // unique: true
+                unique: true
             };
         }
         else dynamicSchema[key] = {

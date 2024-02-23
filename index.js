@@ -6,7 +6,7 @@ const fs = require('fs')
 const path = require('path');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
-
+const dotenv = require('dotenv');
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

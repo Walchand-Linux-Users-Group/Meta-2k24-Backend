@@ -12,6 +12,7 @@ const connectDB = async () => {
 
 const disconnectDB = async () => {
     try{
+        delete mongoose.connection.models[process.env.EVENT+"-"+process.env.YEAR];
         await mongoose.disconnect()
         console.log("Connection Closed");
     }

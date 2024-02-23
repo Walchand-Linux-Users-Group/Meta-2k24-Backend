@@ -12,12 +12,7 @@ const path = require('path');
 const { promisify } = require('util');
 const writeFileAsync = promisify(fs.writeFile);
 
-cloudinary.v2.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_KEY,
-    api_secret: process.env.CLOUDINARY_SECRET,
-    secure: true,
-});
+
 
 const generateDynamicSchema = (fields) => {
     const dynamicSchema = {};
@@ -76,6 +71,12 @@ function init() {
     const result = dotenv.config({ path: '.env' });
     console.log('Initializing event:', process.env.EVENT);
 
+    cloudinary.v2.config({
+        cloud_name: process.env.CLOUDINARY_NAME,
+        api_key: process.env.CLOUDINARY_KEY,
+        api_secret: process.env.CLOUDINARY_SECRET,
+        secure: true,
+    });
 
     let fields = {
         name: process.env.NAME,

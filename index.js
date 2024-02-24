@@ -7,25 +7,25 @@ const path = require('path');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const dotenv = require('dotenv');
+const { connectDB, disconnectDB } = require('./db.js')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
-fs.access('.env', fs.constants.F_OK, (err) => {
-    if (err) {
-        // File doesn't exist, create it
-        fs.writeFile('.env', '', (err) => {
-            if (err) {
-                console.error('Error creating file:', err);
-            } else {
-                console.log('Empty .env file created successfully!');
-            }
-        });
-    } else {
-        console.log('.env file already exists. Skipping creation.');
-    }
-});
+// fs.access('.env', fs.constants.F_OK, (err) => {
+//     if (err) {
+//         fs.writeFile('.env', '', (err) => {
+//             if (err) {
+//                 console.error('Error creating file:', err);
+//             } else {
+//                 console.log('Empty .env file created successfully!');
+//             }
+//         });
+//     } else {
+//         console.log('.env file already exists. Skipping creation.');
+//     }
+// });
 
 
 app.get('/', (req, res) => {
@@ -45,7 +45,6 @@ app.get('/', (req, res) => {
             start: process.env.START,
             end: process.env.END,
             max_users: process.env.MAX_USERS,
-            
         }
     })
 })
@@ -81,5 +80,6 @@ app.use((req, res, next) => {
 })
 
 app.listen(port, () => {
+    connectDB();
     console.log(`Server is listening to port ${port}`);
 })

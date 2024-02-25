@@ -21,4 +21,4 @@ const disconnectDB = async () => {
     }
 }
 
-module.exports = { connectDB, disconnectDB}
+module.exports = {connectDB, disconnectDB}
